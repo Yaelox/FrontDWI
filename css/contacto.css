@@ -12,6 +12,12 @@ body {
     color: black;
 }
 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 120px;
+}
+
 /* Estilos del encabezado */
 header {
     background-color: black;
@@ -67,13 +73,116 @@ section h2 {
     text-align: center;
 }
 
+section p {
+    font-size: 1.1rem;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Sección de formulario de contacto */
+
+#contacto-form {
+    background-color: #fdfdfd;
+    padding: 60px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    margin: 50px 0;
+    text-align: center;
+}
+
+#contacto-form .containerr {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+#contacto-form h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+}
+
+#contacto-form p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    color: black;
+    line-height: 1.6;
+}
+
+/* Estilos del formulario */
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    color: black;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-family: 'Roboto', sans-serif;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: #337ab7;
+    box-shadow: 0 0 5px rgba(51, 122, 183, 0.5);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Botón de enviar */
+
+.button {
+    display: inline-block;
+    background-color: #337ab7;
+    color: #fff;
+    padding: 15px 30px;
+    font-size: 1.1em;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+}
+
+.button:hover {
+    background-color: #23527c;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+
  /* Estilos específicos del footer */
  footer {
     background-color: black;
     color: #fff;
     padding: 40px 0;
     text-align: center;
-    margin-top: 50px; /* Espacio adicional para separar del contenido */
+    margin-top: 25px; /* Espacio adicional para separar del contenido */
 }
 
 footer .container {
@@ -178,105 +287,3 @@ footer .legal a {
 footer .legal a:hover {
     color: #FFA500;
 }
-
-
-    /* Estilos para las cards de productos */
-.product-card {
-    width: calc(50% - 20px); /* Ancho ajustado para dos columnas y espacio entre ellas */
-    max-width: 200px; /* Ancho máximo para limitar el tamaño */
-    margin: 10px;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease;
-    display: inline-block;
-    vertical-align: top;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-}
-
-.product-card img {
-    width: 100%;
-    max-width: 150px; /* Tamaño máximo para la imagen */
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-.product-card h3 {
-    font-size: 1rem; /* Tamaño de fuente más pequeño */
-    margin-bottom: 8px;
-}
-
-.product-card p {
-    font-size: 0.8rem; /* Tamaño de fuente más pequeño */
-    color: #666;
-}
-
-/* Estilos adicionales para pantallas medianas y grandes */
-@media (min-width: 768px) {
-    .product-gallery {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between; /* Espacio entre las columnas */
-    }
-
-    .product-card {
-        width: calc(50% - 20px); /* Dos columnas con espacio entre ellas */
-        max-width: 200px; /* Ancho máximo para las cards */
-        margin: 10px 0;
-    }
-}
-
-
-#mision-vision {
-    background-color: #f9f9f9;
-    padding: 60px 0;
-}
-
-.container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-#mision-vision h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    color: black;
-}
-
-.mission-vision-content {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.mission, .vision {
-    flex-basis: calc(50% - 20px);
-    padding: 20px;
-    background-color: #fff;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-.mission h3, .vision h3 {
-    font-size: 1.8rem;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.mission p, .vision p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: black;
-    text-align: justify;
-}
-
