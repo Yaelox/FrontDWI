@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const usuario = document.getElementById('usuario').value; // Asegúrate de que 'usuario' sea el ID correcto
             const contraseña = document.getElementById('password').value; // Asegúrate de que 'password' sea el ID correcto
 
-            const respuesta = await fetch('http://localhost:3000/login', {
+            const respuesta = await fetch('http://localhost:3000/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

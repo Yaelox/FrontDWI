@@ -11,6 +11,9 @@
     <div class="container">
         <h1>Administración de Usuarios</h1>
         <form id="user-form" class="form-control">
+            <!-- Campo oculto para almacenar el ID del usuario -->
+            <input type="hidden" id="user-id" name="user-id">
+            
             <div class="form-control">
                 <label for="usuario">Usuario</label>
                 <input type="text" id="usuario" name="usuario" required>
@@ -27,9 +30,9 @@
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit" class="btn">Agregar Usuario</button>
+            <button type="submit" id="submit-button" class="btn">Agregar Usuario</button>
         </form>
-        <table class="table" id="user-table">
+        <table class="table" id="user-table-body">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -37,10 +40,14 @@
                     <th>Fecha de Nacimiento</th>
                     <th>Correo Electrónico</th>
                     <th>Contraseña</th>
+                    <th>Acciones</th> <!-- Nueva columna para acciones -->
                 </tr>
             </thead>
+            <tbody>
+            </tbody>
         </table>
     </div>
-    <script src="../js/CRUD.js"></script>
+    <script src="../js/APIS.js"></script>
+    <script src="../js/header.js"></script>
 </body>
 </html>
