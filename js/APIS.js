@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userForm = document.getElementById('user-form');
     const submitButton = document.getElementById('submit-button');
     const userIdField = document.getElementById('user-id');
+    const cancelButton = document.getElementById('cancel-button');
 
     // Función para cargar usuarios
     const loadUsers = async () => {
@@ -42,19 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
             emailCell.textContent = user.email;
             row.appendChild(emailCell);
             
-            const passwordCell = document.createElement('td');
-            passwordCell.textContent = user.contraseña;
-            row.appendChild(passwordCell);
-            
             // Botones de acciones (Editar y Eliminar)
             const actionsCell = document.createElement('td');
             const editButton = document.createElement('button');
             editButton.textContent = 'Editar';
+            editButton.classList.add('edit-button');
             editButton.addEventListener('click', () => handleEditUser(user));
             actionsCell.appendChild(editButton);
 
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Eliminar';
+            deleteButton.classList.add('delete-button');
             deleteButton.addEventListener('click', () => handleDeleteUser(user.ID_Usuario));
             actionsCell.appendChild(deleteButton);
 
@@ -71,7 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('usuario').value = user.usuario;
         document.getElementById('fecha_nacimiento').value = user.fecha_nacimiento;
         document.getElementById('email').value = user.email;
-        document.getElementById('password').value = user.contraseña;
+
+        // Bloquear el campo de contraseña
+        document.getElementById('password').disabled = true;
 
         // Cambiar texto y funcionalidad del botón de submit
         submitButton.textContent = 'Actualizar Usuario';
@@ -80,52 +81,54 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Función para manejar la actualización de un usuario
-const handleUpdateUser = async (event) => {
-    event.preventDefault();
+    const handleUpdateUser = async (event) => {
+        event.preventDefault();
 
-    const userId = userIdField.value;
-    const usuario = document.getElementById('usuario').value;
-    const fecha_nacimiento = new Date(document.getElementById('fecha_nacimiento').value).toISOString().slice(0, 10); // Formato YYYY-MM-DD
-    const email = document.getElementById('email').value;
-    const contraseña = document.getElementById('password').value;
+        const userId = userIdField.value;
+        const usuario = document.getElementById('usuario').value;
+        const fecha_nacimiento = new Date(document.getElementById('fecha_nacimiento').value).toISOString().slice(0, 10); // Formato YYYY-MM-DD
+        const email = document.getElementById('email').value;
 
-    try {
-        const response = await fetch(`http://localhost:3000/api/crud/usuarios/${userId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ usuario, fecha_nacimiento, email, contraseña })
-        });
+        try {
+            const response = await fetch(`http://localhost:3000/api/crud/usuarios/${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ usuario, fecha_nacimiento, email })
+            });
 
-        if (!response.ok) {
-            throw new Error('Error al actualizar usuario');
+            if (!response.ok) {
+                throw new Error('Error al actualizar usuario');
+            }
+
+            const data = await response.json();
+            alert(data.mensaje); // Muestra el mensaje de éxito o error
+
+            // Recargar la página para reflejar los cambios
+            window.location.reload();
+
+            // Limpiar el formulario después de actualizar el usuario
+            userForm.reset();
+
+            // Restaurar texto del botón
+            submitButton.textContent = 'Agregar Usuario';
+
+            // Remover el listener para actualizar usuario y agregar el de agregar usuario nuevamente
+            userForm.removeEventListener('submit', handleUpdateUser);
+            userForm.addEventListener('submit', handleAddUser);
+
+            // Desbloquear el campo de contraseña para futuras operaciones
+            document.getElementById('password').disabled = false;
+
+        } catch (error) {
+            console.error('Error al actualizar usuario:', error.message);
+            alert('Hubo un error al actualizar el usuario.');
+
+            // Desbloquear el campo de contraseña en caso de error
+            document.getElementById('password').disabled = false;
         }
-
-        const data = await response.json();
-        alert(data.mensaje); // Muestra el mensaje de éxito o error
-
-        // Recargar la página para reflejar los cambios
-        window.location.reload();
-
-        // Limpiar el formulario después de actualizar el usuario
-        userForm.reset();
-
-        // Restaurar texto del botón
-        submitButton.textContent = 'Agregar Usuario';
-
-        // Remover el listener para actualizar usuario y agregar el de agregar usuario nuevamente
-        userForm.removeEventListener('submit', handleUpdateUser);
-        userForm.addEventListener('submit', handleAddUser);
-
-        // Cargar usuarios después de actualizar (si es necesario)
-        // loadUsers();
-    } catch (error) {
-        console.error('Error al actualizar usuario:', error.message);
-        alert('Hubo un error al actualizar el usuario.');
-    }
-};
-    
+    };
 
     // Función para agregar un nuevo usuario
     const handleAddUser = async (event) => {
@@ -181,6 +184,26 @@ const handleUpdateUser = async (event) => {
 
     // Listener para manejar la adición de usuarios
     userForm.addEventListener('submit', handleAddUser);
+
+    // Función para manejar la cancelación de la edición/creación de usuarios
+    const handleCancelEdit = () => {
+        // Limpiar el formulario
+        userForm.reset();
+
+        // Restaurar el texto y funcionalidad del botón de submit
+        submitButton.textContent = 'Agregar Usuario';
+        userForm.removeEventListener('submit', handleUpdateUser);
+        userForm.addEventListener('submit', handleAddUser);
+
+        // Desbloquear el campo de contraseña
+        document.getElementById('password').disabled = false;
+
+        // Limpiar el campo oculto de ID de usuario
+        userIdField.value = '';
+    };
+
+    // Listener para el botón de cancelar
+    cancelButton.addEventListener('click', handleCancelEdit);
 
     // Cargar usuarios al cargar la página
     loadUsers();

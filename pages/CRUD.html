@@ -6,8 +6,9 @@
     <title>CRUD de Usuarios - Administración</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/CRUD.css">
+    <link rel="stylesheet" href="../css/botones.css">
 </head>
-<body>
+<body><br><br>
     <div class="container">
         <h1>Administración de Usuarios</h1>
         <form id="user-form" class="form-control">
@@ -31,6 +32,7 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <button type="submit" id="submit-button" class="btn">Agregar Usuario</button>
+            <button type="button" id="cancel-button" class="btn">Cancelar</button>
         </form>
         <table class="table" id="user-table-body">
             <thead>
@@ -39,7 +41,6 @@
                     <th>Nombre</th>
                     <th>Fecha de Nacimiento</th>
                     <th>Correo Electrónico</th>
-                    <th>Contraseña</th>
                     <th>Acciones</th> <!-- Nueva columna para acciones -->
                 </tr>
             </thead>
@@ -48,6 +49,5 @@
         </table>
     </div>
     <script src="../js/APIS.js"></script>
-    <script src="../js/header.js"></script>
 </body>
 </html>
