@@ -26,23 +26,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
         users.forEach(user => {
             const row = document.createElement('tr');
-            
+
             const idCell = document.createElement('td');
             idCell.textContent = user.ID_Usuario;
             row.appendChild(idCell);
-            
+
             const userCell = document.createElement('td');
             userCell.textContent = user.usuario;
             row.appendChild(userCell);
-            
+
             const birthDateCell = document.createElement('td');
             birthDateCell.textContent = user.fecha_nacimiento;
             row.appendChild(birthDateCell);
-            
+
             const emailCell = document.createElement('td');
             emailCell.textContent = user.email;
             row.appendChild(emailCell);
-            
+
+            // Celula para el rol
+            const roleCell = document.createElement('td');
+            roleCell.textContent = user.role_name; // Suponiendo que `role_name` es el nombre del rol obtenido del backend
+            row.appendChild(roleCell);
+
             // Botones de acciones (Editar y Eliminar)
             const actionsCell = document.createElement('td');
             const editButton = document.createElement('button');
@@ -71,6 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('fecha_nacimiento').value = user.fecha_nacimiento;
         document.getElementById('email').value = user.email;
 
+        // Seleccionar el rol del usuario en el formulario de edición
+        const rolSelect = document.getElementById('rol');
+        rolSelect.value = user.role_id; // Asumiendo que user.role_id es el ID del rol del usuario
+
         // Bloquear el campo de contraseña
         document.getElementById('password').disabled = true;
 
@@ -88,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const usuario = document.getElementById('usuario').value;
         const fecha_nacimiento = new Date(document.getElementById('fecha_nacimiento').value).toISOString().slice(0, 10); // Formato YYYY-MM-DD
         const email = document.getElementById('email').value;
+        const rol = document.getElementById('rol').value; // Obtener el valor del rol seleccionado
 
         try {
             const response = await fetch(`http://localhost:3000/api/crud/usuarios/${userId}`, {
@@ -95,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ usuario, fecha_nacimiento, email })
+                body: JSON.stringify({ usuario, fecha_nacimiento, email, rol }) // Incluir el rol en el body
             });
 
             if (!response.ok) {
@@ -106,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert(data.mensaje); // Muestra el mensaje de éxito o error
 
             // Recargar la página para reflejar los cambios
-            window.location.reload();
+            loadUsers();
 
             // Limpiar el formulario después de actualizar el usuario
             userForm.reset();
@@ -138,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
         const email = document.getElementById('email').value;
         const contraseña = document.getElementById('password').value;
+        const rol = document.getElementById('rol').value; // Obtener el valor del rol seleccionado
 
         try {
             const response = await fetch('http://localhost:3000/api/crud/usuarios', {
@@ -145,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ usuario, fecha_nacimiento, email, contraseña })
+                body: JSON.stringify({ usuario, fecha_nacimiento, email, contraseña, rol }) // Incluir el rol en el body
             });
 
             if (!response.ok) {
