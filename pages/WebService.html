@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon API</title>
+    <link rel="stylesheet" href="../css/webservice.css">
+</head>
+<body>
+    <h1>Pokémon API</h1>
+    <input type="text" id="pokemonId" placeholder="Enter Pokémon ID">
+    <button onclick="getPokemon()">Get Pokémon</button>
+    
+    <table id="pokemonTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Abilities</th>
+                <th>Weight</th>
+                <th>Height</th>
+                <th>Type(s)</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody id="pokemonData">
+            <!-- Pokémon data will be inserted here -->
+        </tbody>
+    </table>
+
+    <script src="../js/pokemon.js"></script>
+</body>
+</html>
