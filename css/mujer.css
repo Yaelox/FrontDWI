@@ -1,0 +1,214 @@
+/* Estilos específicos del footer */
+footer {
+    background-color: black;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+    margin-top: 50px; /* Espacio adicional para separar del contenido */
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+footer .footer-info {
+    flex: 1;
+    text-align: left;
+    margin-right: 20px;
+}
+
+footer .footer-info h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #FFD700;
+}
+
+footer .footer-info p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #fff;
+}
+
+footer .footer-info p strong {
+    color: #FFD700;
+}
+
+footer .horarios {
+    flex: 1;
+    text-align: left;
+    margin-right: 20px;
+}
+
+footer .horarios h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #FFD700;
+}
+
+footer .horarios p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #fff;
+}
+
+footer .redes-sociales {
+    flex: 1;
+    text-align: left;
+}
+
+footer .redes-sociales h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #FFD700;
+}
+
+footer .redes-sociales ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer .redes-sociales ul li {
+    margin-bottom: 10px;
+}
+
+footer .redes-sociales ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+footer .redes-sociales ul li a:hover {
+    color: #FFD700;
+}
+
+footer .legal {
+    flex-basis: 100%;
+    margin-top: 30px;
+}
+
+footer .legal p {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+footer .legal a {
+    color: #FFD700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer .legal a:hover {
+    color: #FFA500;
+}
+
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #fefefe;
+    color: #444;
+}
+
+.seccion-mujer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero section */
+.hero {
+    background: linear-gradient(135deg, #ff99cc, #ffe6f0);
+    color: #333;
+    text-align: center;
+    padding: 60px 20px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    border: 2px solid #ffd1dc;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin: 0;
+    color: #d60093;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin: 15px 0 0 0;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto;
+    font-style: italic;
+}
+
+/* Productos */
+.productos-destacados {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.producto {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    border: 1px solid #f2f2f2;
+}
+
+.producto:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.producto img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.producto h3 {
+    font-size: 1.4rem;
+    color: #d60093;
+    margin: 15px 0 5px;
+}
+
+.producto p {
+    font-size: 1.1rem;
+    color: #777;
+    margin: 0 0 20px;
+}
+
+.btn-comprar {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 30px;
+    background-color: #ff66a3;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.btn-comprar:hover {
+    background-color: #d60093;
+    transform: scale(1.05);
+}

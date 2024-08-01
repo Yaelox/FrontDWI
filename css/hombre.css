@@ -1,0 +1,203 @@
+/* Estilos globales */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: black;
+}
+/* Estilo para la sección de tenis para hombre */
+.seccion-hombres {
+    background-color: #f4f4f4;
+    padding: 50px 20px;
+    text-align: justify;
+    color: #333;
+}
+
+.contenedor-titulo {
+    margin-bottom: 30px;
+    background: linear-gradient(to right, #00cc66, #00994d);
+    padding: 20px;
+    border-radius: 10px;
+    color:black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contenedor-titulo h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.contenedor-titulo p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.producto {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.producto:hover {
+    transform: translateY(-10px);
+}
+
+.producto img {
+    width: 100%;
+    height: auto;
+}
+
+.producto h3 {
+    margin: 15px;
+    font-size: 1.5rem;
+    color: #00cc66;
+}
+
+.producto p {
+    margin: 0 15px 15px 15px;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.btn-comprar {
+    display: block;
+    text-align: center;
+    margin: 15px;
+    padding: 10px 0;
+    background-color: #00cc66;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+}
+
+.btn-comprar:hover {
+    background-color: #00994d;
+}
+
+/* Estilos específicos del footer */
+footer {
+    background-color: black;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+    margin-top: 50px; /* Espacio adicional para separar del contenido */
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+footer .footer-info {
+    flex: 1;
+    text-align: left;
+    margin-right: 20px;
+}
+
+footer .footer-info h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #FFD700;
+}
+
+footer .footer-info p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #fff;
+}
+
+footer .footer-info p strong {
+    color: #FFD700;
+}
+
+footer .horarios {
+    flex: 1;
+    text-align: left;
+    margin-right: 20px;
+}
+
+footer .horarios h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #FFD700;
+}
+
+footer .horarios p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #fff;
+}
+
+footer .redes-sociales {
+    flex: 1;
+    text-align: left;
+}
+
+footer .redes-sociales h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #FFD700;
+}
+
+footer .redes-sociales ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer .redes-sociales ul li {
+    margin-bottom: 10px;
+}
+
+footer .redes-sociales ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+footer .redes-sociales ul li a:hover {
+    color: #FFD700;
+}
+
+footer .legal {
+    flex-basis: 100%;
+    margin-top: 30px;
+}
+
+footer .legal p {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+footer .legal a {
+    color: #FFD700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer .legal a:hover {
+    color: #FFA500;
+}
