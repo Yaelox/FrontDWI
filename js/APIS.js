@@ -88,57 +88,58 @@ document.addEventListener('DOMContentLoaded', () => {
         userForm.removeEventListener('submit', handleAddUser); // Remover el listener anterior
         userForm.addEventListener('submit', handleUpdateUser); // Agregar el listener para actualizar usuario
     };
+// Función para manejar la actualización de un usuario
+const handleUpdateUser = async (event) => {
+    event.preventDefault();
 
-    // Función para manejar la actualización de un usuario
-    const handleUpdateUser = async (event) => {
-        event.preventDefault();
+    const userId = document.getElementById('user-id').value; // Obtener el ID del usuario
+    const usuario = document.getElementById('usuario').value;
+    const fecha_nacimiento = new Date(document.getElementById('fecha_nacimiento').value).toISOString().slice(0, 10); // Formato YYYY-MM-DD
+    const email = document.getElementById('email').value;
+    const rol = document.getElementById('rol').value; // Sin conversión, ya está en formato numérico
 
-        const userId = userIdField.value;
-        const usuario = document.getElementById('usuario').value;
-        const fecha_nacimiento = new Date(document.getElementById('fecha_nacimiento').value).toISOString().slice(0, 10); // Formato YYYY-MM-DD
-        const email = document.getElementById('email').value;
-        const rol = document.getElementById('rol').value; // Obtener el valor del rol seleccionado
+    try {
+        const response = await fetch(`http://localhost:3000/api/crud/usuarios/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ usuario, fecha_nacimiento, email, rol }) // Incluir el rol en el body
+        });
 
-        try {
-            const response = await fetch(`http://localhost:3000/api/crud/usuarios/${userId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ usuario, fecha_nacimiento, email, rol }) // Incluir el rol en el body
-            });
-
-            if (!response.ok) {
-                throw new Error('Error al actualizar usuario');
-            }
-
-            const data = await response.json();
-            alert(data.mensaje); // Muestra el mensaje de éxito o error
-
-            // Recargar la página para reflejar los cambios
-            loadUsers();
-
-            // Limpiar el formulario después de actualizar el usuario
-            userForm.reset();
-
-            // Restaurar texto del botón
-            submitButton.textContent = 'Agregar Usuario';
-
-            // Remover el listener para actualizar usuario y agregar el de agregar usuario nuevamente
-            userForm.removeEventListener('submit', handleUpdateUser);
-            userForm.addEventListener('submit', handleAddUser);
-
-            // Desbloquear el campo de contraseña para futuras operaciones
-            document.getElementById('password').disabled = false;
-
-        } catch (error) {
-            console.error('Error al actualizar usuario:', error.message);
-            alert('Hubo un error al actualizar el usuario.');
-
-            // Desbloquear el campo de contraseña en caso de error
-            document.getElementById('password').disabled = false;
+        if (!response.ok) {
+            throw new Error('Error al actualizar usuario');
         }
-    };
+
+        const data = await response.json();
+        console.log('Response data:', data); // Agregar log para verificar la respuesta
+
+        // Recargar la página para reflejar los cambios
+        loadUsers();
+
+        // Limpiar el formulario después de actualizar el usuario
+        userForm.reset();
+
+        // Restaurar texto del botón
+        submitButton.textContent = 'Agregar Usuario';
+
+        // Remover el listener para actualizar usuario y agregar el de agregar usuario nuevamente
+        userForm.removeEventListener('submit', handleUpdateUser);
+        userForm.addEventListener('submit', handleAddUser);
+
+        // Desbloquear el campo de contraseña para futuras operaciones
+        document.getElementById('password').disabled = false;
+
+    } catch (error) {
+        console.error('Error al actualizar usuario:', error.message);
+        alert('Hubo un error al actualizar el usuario.');
+
+        // Desbloquear el campo de contraseña en caso de error
+        document.getElementById('password').disabled = false;
+    }
+};
+
+
 
  // Función para agregar usuarios
 const handleAddUser = async (event) => {
