@@ -1,13 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Página de Pago</title>
+    <link rel="stylesheet" href="../css/comprar.css">
 </head>
 <body>
-    <h1>HOLA
-        
-    </h1>
+    <section class="seccion-pago">
+        <div class="container">
+            <h1>Página de Pago</h1>
+            <form action="procesar-pago.php" method="POST">
+                <div class="informacion-cliente">
+                    <h2>Información de Contacto</h2>
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+
+                <div class="direccion-envio">
+                    <h2>Dirección de Envío</h2>
+                    <label for="nombre">Nombre Completo:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                    
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" name="direccion" required>
+                    
+                    <label for="ciudad">Ciudad:</label>
+                    <input type="text" id="ciudad" name="ciudad" required>
+                    
+                    <label for="estado">Estado/Provincia:</label>
+                    <input type="text" id="estado" name="estado" required>
+                    
+                    <label for="codigo-postal">Código Postal:</label>
+                    <input type="text" id="codigo-postal" name="codigo-postal" required>
+                    
+                    <label for="pais">País:</label>
+                    <input type="text" id="pais" name="pais" required>
+                </div>
+
+                <div class="informacion-producto">
+                    <h2>Información del Producto</h2>
+                    <label for="modelo">Modelo de Tenis:</label>
+                    <select id="modelo" name="modelo" onchange="actualizarPrecio()" required>
+                        <option value="">Seleccione un modelo</option>
+                        <option value="Modelo A" data-precio="1500">Modelo A - $1,500</option>
+                        <option value="Modelo B" data-precio="1800">Modelo B - $1,800</option>
+                        <option value="Modelo C" data-precio="2000">Modelo C - $2,000</option>
+                    </select>
+
+                    <label for="talla">Talla (Mexicana):</label>
+                    <select id="talla" name="talla" required>
+                        <option value="">Seleccione una talla</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad" name="cantidad" min="1" max="10" oninput="actualizarPrecioTotal()" required>
+
+                    <p id="cantidad-disponible">Cantidad disponible: 10</p>
+
+                    <p class="precio">Precio unitario: <span id="precio">Seleccione un modelo</span></p>
+                    <p class="precio">Precio total: <span id="precio-total">Seleccione un modelo y cantidad</span></p>
+                </div>
+
+                <div class="informacion-pago">
+                    <h2>Información de Pago</h2>
+                    <label for="nombre-tarjeta">Nombre en la Tarjeta:</label>
+                    <input type="text" id="nombre-tarjeta" name="nombre-tarjeta" required>
+                    
+                    <label for="numero-tarjeta">Número de Tarjeta de Crédito:</label>
+                    <input type="text" id="numero-tarjeta" name="numero-tarjeta" required>
+                    
+                    <label for="fecha-expiracion">Fecha de Expiración:</label>
+                    <input type="month" id="fecha-expiracion" name="fecha-expiracion" required>
+                    
+                    <label for="cvc">CVC:</label>
+                    <input type="text" id="cvc" name="cvc" required>
+                </div>
+
+                <button type="submit" class="btn-comprar">Realizar Pago</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        function actualizarPrecio() {
+            const modeloSelect = document.getElementById('modelo');
+            const precioLabel = document.getElementById('precio');
+            const precioTotalLabel = document.getElementById('precio-total');
+            const precio = modeloSelect.options[modeloSelect.selectedIndex].getAttribute('data-precio');
+            precioLabel.textContent = precio ? '$' + precio : 'Seleccione un modelo';
+            actualizarPrecioTotal(); // Actualizar el precio total al cambiar el modelo
+        }
+
+        function actualizarPrecioTotal() {
+            const precio = document.getElementById('modelo').options[document.getElementById('modelo').selectedIndex].getAttribute('data-precio');
+            const cantidad = document.getElementById('cantidad').value;
+            const precioTotalLabel = document.getElementById('precio-total');
+
+            if (precio && cantidad) {
+                const total = precio * cantidad;
+                precioTotalLabel.textContent = '$' + total;
+            } else {
+                precioTotalLabel.textContent = 'Seleccione un modelo y cantidad';
+            }
+        }
+    </script>
 </body>
 </html>

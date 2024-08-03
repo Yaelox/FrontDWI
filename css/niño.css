@@ -1,0 +1,220 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;
+    color: #f0f0f0;
+}
+
+.seccion-kids {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1c1c1c;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    border: 2px solid #272727;
+    overflow: hidden;
+}
+
+/* Hero section */
+.hero {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #fff;
+    text-align: center;
+    padding: 80px 20px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: #ff4081;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin: 20px 0 0;
+    color: #c1c1c1;
+    max-width: 700px;
+    margin: 0 auto;
+    font-style: italic;
+}
+
+/* Productos */
+.productos-destacados {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+    padding-bottom: 40px;
+}
+
+.producto {
+    background-color: #232323;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    border: 2px solid #3a3a3a;
+}
+
+.producto:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+.producto img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-bottom: 2px solid #3a3a3a;
+}
+
+.producto h3 {
+    font-size: 1.6rem;
+    color: #00c6ff;
+    margin: 15px 0 5px;
+}
+
+.producto p {
+    font-size: 1.2rem;
+    color: #999;
+    margin: 0 0 20px;
+}
+
+.btn-comprar {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 12px 35px;
+    background-color: #ff4081;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(255, 64, 129, 0.5);
+}
+
+.btn-comprar:hover {
+    background-color: #ff80ab;
+    transform: scale(1.1);
+}
+
+/* Estilos específicos del footer */
+footer {
+    background-color: black;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+    margin-top: 50px; /* Espacio adicional para separar del contenido */
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+footer .footer-info {
+    flex: 1;
+    text-align: left;
+    margin-right: 20px;
+}
+
+footer .footer-info h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #FFD700;
+}
+
+footer .footer-info p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #fff;
+}
+
+footer .footer-info p strong {
+    color: #FFD700;
+}
+
+footer .horarios {
+    flex: 1;
+    text-align: left;
+    margin-right: 20px;
+}
+
+footer .horarios h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #FFD700;
+}
+
+footer .horarios p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #fff;
+}
+
+footer .redes-sociales {
+    flex: 1;
+    text-align: left;
+}
+
+footer .redes-sociales h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #FFD700;
+}
+
+footer .redes-sociales ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer .redes-sociales ul li {
+    margin-bottom: 10px;
+}
+
+footer .redes-sociales ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+footer .redes-sociales ul li a:hover {
+    color: #FFD700;
+}
+
+footer .legal {
+    flex-basis: 100%;
+    margin-top: 30px;
+}
+
+footer .legal p {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+footer .legal a {
+    color: #FFD700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer .legal a:hover {
+    color: #FFA500;
+}

@@ -1,10 +1,27 @@
+/* Estilo general del body y html para altura mínima completa */
+html, body {
+    height: 100%;
+    margin: 0;
+}
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Contenedor principal para el contenido */
+.main-content {
+    flex: 1; /* Toma el espacio disponible restante */
+}
+
+/* Estilo del h1 */
 h1 {
     color: white;
     text-align: center;
     margin-bottom: 20px;
 }
 
+/* Estilo del input y el botón */
 #pokemonId {
     padding: 10px;
     font-size: 16px;
@@ -23,6 +40,7 @@ button {
     cursor: pointer;
 }
 
+/* Estilo de la tabla */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -43,4 +61,116 @@ img {
     height: auto;
     display: block;
     margin: 0 auto;
+}
+
+/* Estilos específicos del footer */
+footer {
+    background-color: black;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+    margin-top: 50px; /* Espacio adicional para separar del contenido */
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+footer .footer-info {
+    flex: 1;
+    text-align: left;
+    margin-right: 20px;
+}
+
+footer .footer-info h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #FFD700;
+}
+
+footer .footer-info p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #fff;
+}
+
+footer .footer-info p strong {
+    color: #FFD700;
+}
+
+footer .horarios {
+    flex: 1;
+    text-align: left;
+    margin-right: 20px;
+}
+
+footer .horarios h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #FFD700;
+}
+
+footer .horarios p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #fff;
+}
+
+footer .redes-sociales {
+    flex: 1;
+    text-align: left;
+}
+
+footer .redes-sociales h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #FFD700;
+}
+
+footer .redes-sociales ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer .redes-sociales ul li {
+    margin-bottom: 10px;
+}
+
+footer .redes-sociales ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+footer .redes-sociales ul li a:hover {
+    color: #FFD700;
+}
+
+footer .legal {
+    flex-basis: 100%;
+    margin-top: 30px;
+}
+
+footer .legal p {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+footer .legal a {
+    color: #FFD700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer .legal a:hover {
+    color: #FFA500;
 }

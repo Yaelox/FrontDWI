@@ -7,10 +7,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/CRUD.css">
     <link rel="stylesheet" href="../css/botones.css">
+    <link rel="stylesheet" href="../css/header.css">
 </head>
 <body>
+    <!-- Encabezado -->
+    <header>
+        <div class="header-container">
+            <h1>Administración de Usuarios</h1>
+            <nav>
+                <ul>
+                    <li><a href="../pages/inicio.html">Inicio</a></li>
+                    <li><a href="../pages/hombre.html">Hombre</a></li>
+                    <li><a href="../pages/mujer.html">Mujer</a></li>
+                    <li><a href="../pages/niños.html">Niños</a></li>
+                    <li><a href="../pages/contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <div class="container">
-        <p>Administración de Usuarios</p>
         <form id="user-form" class="form-control">
             <!-- Campo oculto para almacenar el ID del usuario -->
             <input type="hidden" id="user-id" name="user-id">
@@ -31,17 +47,17 @@
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <div class="form-controll">
+            <div class="form-control">
                 <label for="rol">Rol:</label>
                 <select id="rol" name="rol" required>
                     <option value="admin">1 - Admin</option>
-                    <option value="customer">2 - Customer</option>
-                    <option value="Employee">3 - Employee</option>
+                    <option value="usuario">2 - Usuario</option>
                 </select>
             </div>
             <button type="submit" id="submit-button" class="btn">Agregar Usuario</button>
             <button type="button" id="cancel-button" class="btn">Cancelar</button>
         </form>
+        
         <table class="table" id="user-table-body">
             <thead>
                 <tr>
@@ -57,6 +73,16 @@
             </tbody>
         </table>
     </div>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 Future Tennis Store. Todos los derechos reservados.</p>
+            <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
+            <p>Contacto: <a href="mailto:info@futuretennisstore.com">info@futuretennisstore.com</a></p>
+        </div>
+    </footer>
+
     <script src="../js/APIS.js"></script>
 </body>
 </html>
