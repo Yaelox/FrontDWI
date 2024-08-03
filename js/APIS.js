@@ -140,40 +140,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Función para agregar un nuevo usuario
-    const handleAddUser = async (event) => {
-        event.preventDefault();
+ // Función para agregar usuarios
+const handleAddUser = async (event) => {
+    event.preventDefault();
 
-        const usuario = document.getElementById('usuario').value;
-        const fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
-        const email = document.getElementById('email').value;
-        const contraseña = document.getElementById('password').value;
-        const rol = document.getElementById('rol').value; // Obtener el valor del rol seleccionado
+    // Obtener los valores del formulario
+    const usuario = document.getElementById('usuario').value;
+    const fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
+    const email = document.getElementById('email').value;
+    const contraseña = document.getElementById('password').value;
+    const role_id = document.getElementById('rol').value; // Convertir a número
 
-        try {
-            const response = await fetch('http://localhost:3000/api/crud/usuarios', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ usuario, fecha_nacimiento, email, contraseña, rol }) // Incluir el rol en el body
-            });
+    console.log('Datos del usuario:', { usuario, fecha_nacimiento, email, contraseña, role_id });
 
-            if (!response.ok) {
-                throw new Error('Error al agregar usuario');
-            }
+    try {
+        const response = await fetch('http://localhost:3000/api/crud/usuarios', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ usuario, fecha_nacimiento, email, contraseña, role_id })
+        });
 
-            const data = await response.json();
-            alert(data.mensaje); // Muestra el mensaje de éxito o error
-
-            // Limpiar el formulario después de agregar el usuario
-            userForm.reset();
-            loadUsers(); // Recargar usuarios después de agregar
-        } catch (error) {
-            console.error('Error al agregar usuario:', error.message);
-            alert('Hubo un error al agregar el usuario.');
+        // Verifica si la respuesta es correcta
+        if (!response.ok) {
+            // Leer el contenido del error si está disponible
+            const errorData = await response.json();
+            throw new Error(errorData.mensaje || 'Error desconocido');
         }
-    };
+
+        const data = await response.json();
+        console.log('Respuesta del servidor:', data);
+        alert(data.mensaje); // Muestra el mensaje de éxito
+
+        // Limpiar el formulario después de agregar el usuario
+        document.getElementById('user-form').reset();
+        // Recargar la página
+        location.reload();
+    } catch (error) {
+        console.error('Error al agregar usuario:', error.message);
+        alert('Hubo un error al agregar el usuario.');
+    }
+};
+
+document.getElementById('user-form').addEventListener('submit', handleAddUser);
+
+// Agrega el botón para cancelar la agregación
+document.getElementById('cancel-button');
+cancelButton.addEventListener('click', () => {
+    document.getElementById('user-form').reset();
+    // Puedes agregar más acciones aquí si es necesario
+});
+
+
 
     // Función para manejar la eliminación de un usuario
     const handleDeleteUser = async (userId) => {
