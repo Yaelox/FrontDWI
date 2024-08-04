@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const userIdField = document.getElementById('user-id');
     const cancelButton = document.getElementById('cancel-button');
 
-    // Función para cargar usuarios
     const loadUsers = async () => {
         try {
             const response = await fetch('http://localhost:3000/api/users');
@@ -12,17 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error('Error al cargar usuarios');
             }
             const data = await response.json();
-            renderUsers(data); // Función para renderizar los usuarios en la tabla
+            renderUsers(data);
         } catch (error) {
             console.error('Error al cargar usuarios:', error);
             alert('Hubo un error al cargar los usuarios.');
         }
     };
 
-    // Función para renderizar usuarios en la tabla
     const renderUsers = (users) => {
         const userTableBody = document.querySelector('#user-table-body tbody');
-        userTableBody.innerHTML = ''; // Limpiar contenido anterior de la tabla
+        userTableBody.innerHTML = '';
 
         users.forEach(user => {
             const row = document.createElement('tr');
@@ -43,12 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
             emailCell.textContent = user.email;
             row.appendChild(emailCell);
 
-            // Celula para el rol
             const roleCell = document.createElement('td');
-            roleCell.textContent = user.role_name; // Suponiendo que `role_name` es el nombre del rol obtenido del backend
+            roleCell.textContent = user.role_name;
             row.appendChild(roleCell);
 
-            // Botones de acciones (Editar y Eliminar)
             const actionsCell = document.createElement('td');
             const editButton = document.createElement('button');
             editButton.textContent = 'Editar';
@@ -68,174 +64,124 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Función para manejar la edición de un usuario
     const handleEditUser = (user) => {
-        // Llenar el formulario con los datos del usuario seleccionado
         userIdField.value = user.ID_Usuario;
         document.getElementById('usuario').value = user.usuario;
         document.getElementById('fecha_nacimiento').value = user.fecha_nacimiento;
         document.getElementById('email').value = user.email;
-
-        // Seleccionar el rol del usuario en el formulario de edición
         const rolSelect = document.getElementById('rol');
-        rolSelect.value = user.role_id; // Asumiendo que user.role_id es el ID del rol del usuario
-
-        // Bloquear el campo de contraseña
+        rolSelect.value = user.role_id;
         document.getElementById('password').disabled = true;
-
-        // Cambiar texto y funcionalidad del botón de submit
         submitButton.textContent = 'Actualizar Usuario';
-        userForm.removeEventListener('submit', handleAddUser); // Remover el listener anterior
-        userForm.addEventListener('submit', handleUpdateUser); // Agregar el listener para actualizar usuario
+        userForm.removeEventListener('submit', handleAddUser);
+        userForm.addEventListener('submit', handleUpdateUser);
     };
-// Función para manejar la actualización de un usuario
-const handleUpdateUser = async (event) => {
-    event.preventDefault();
 
-    const userId = document.getElementById('user-id').value; // Obtener el ID del usuario
-    const usuario = document.getElementById('usuario').value;
-    const fecha_nacimiento = new Date(document.getElementById('fecha_nacimiento').value).toISOString().slice(0, 10); // Formato YYYY-MM-DD
-    const email = document.getElementById('email').value;
-    const rol = document.getElementById('rol').value; // Sin conversión, ya está en formato numérico
+    const handleUpdateUser = async (event) => {
+        event.preventDefault();
 
-    try {
-        const response = await fetch(`http://localhost:3000/api/crud/usuarios/${userId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ usuario, fecha_nacimiento, email, rol }) // Incluir el rol en el body
-        });
+        const userId = document.getElementById('user-id').value;
+        const usuario = document.getElementById('usuario').value;
+        const fecha_nacimiento = new Date(document.getElementById('fecha_nacimiento').value).toISOString().slice(0, 10);
+        const email = document.getElementById('email').value;
+        const rol = document.getElementById('rol').value;
 
-        if (!response.ok) {
-            throw new Error('Error al actualizar usuario');
+        try {
+            const response = await fetch(`http://localhost:3000/api/crud/usuarios/${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ usuario, fecha_nacimiento, email, rol })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.mensaje || 'Error desconocido');
+            }
+
+            const data = await response.json();
+            console.log('Response data:', data);
+            alert(data.mensaje);
+            loadUsers();
+            userForm.reset();
+            submitButton.textContent = 'Agregar Usuario';
+            userForm.removeEventListener('submit', handleUpdateUser);
+            userForm.addEventListener('submit', handleAddUser);
+            document.getElementById('password').disabled = false;
+        } catch (error) {
+            console.error('Error al actualizar usuario:', error.message);
+            alert('Hubo un error al actualizar el usuario.');
+            document.getElementById('password').disabled = false;
         }
+    };
 
-        const data = await response.json();
-        console.log('Response data:', data); // Agregar log para verificar la respuesta
+    const handleAddUser = async (event) => {
+        event.preventDefault();
 
-        // Recargar la página para reflejar los cambios
-        loadUsers();
+        const usuario = document.getElementById('usuario').value;
+        const fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
+        const email = document.getElementById('email').value;
+        const contraseña = document.getElementById('password').value;
+        const role_id = document.getElementById('rol').value;
 
-        // Limpiar el formulario después de actualizar el usuario
+        console.log('Datos del usuario:', { usuario, fecha_nacimiento, email, contraseña, role_id });
+
+        try {
+            const response = await fetch('http://localhost:3000/api/crud/usuarios', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ usuario, fecha_nacimiento, email, contraseña, role_id })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.mensaje || 'Error desconocido');
+            }
+
+            const data = await response.json();
+            console.log('Respuesta del servidor:', data);
+            alert(data.mensaje);
+            userForm.reset();
+            loadUsers();
+        } catch (error) {
+            console.error('Error al agregar usuario:', error.message);
+            alert('Hubo un error al agregar el usuario.');
+        }
+    };
+
+    userForm.addEventListener('submit', handleAddUser);
+
+    const handleCancelEdit = () => {
         userForm.reset();
-
-        // Restaurar texto del botón
         submitButton.textContent = 'Agregar Usuario';
-
-        // Remover el listener para actualizar usuario y agregar el de agregar usuario nuevamente
         userForm.removeEventListener('submit', handleUpdateUser);
         userForm.addEventListener('submit', handleAddUser);
-
-        // Desbloquear el campo de contraseña para futuras operaciones
         document.getElementById('password').disabled = false;
+        userIdField.value = '';
+    };
 
-    } catch (error) {
-        console.error('Error al actualizar usuario:', error.message);
-        alert('Hubo un error al actualizar el usuario.');
+    cancelButton.addEventListener('click', handleCancelEdit);
 
-        // Desbloquear el campo de contraseña en caso de error
-        document.getElementById('password').disabled = false;
-    }
-};
-
-
-
- // Función para agregar usuarios
-const handleAddUser = async (event) => {
-    event.preventDefault();
-
-    // Obtener los valores del formulario
-    const usuario = document.getElementById('usuario').value;
-    const fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
-    const email = document.getElementById('email').value;
-    const contraseña = document.getElementById('password').value;
-    const role_id = document.getElementById('rol').value; // Convertir a número
-
-    console.log('Datos del usuario:', { usuario, fecha_nacimiento, email, contraseña, role_id });
-
-    try {
-        const response = await fetch('http://localhost:3000/api/crud/usuarios', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ usuario, fecha_nacimiento, email, contraseña, role_id })
-        });
-
-        // Verifica si la respuesta es correcta
-        if (!response.ok) {
-            // Leer el contenido del error si está disponible
-            const errorData = await response.json();
-            throw new Error(errorData.mensaje || 'Error desconocido');
-        }
-
-        const data = await response.json();
-        console.log('Respuesta del servidor:', data);
-        alert(data.mensaje); // Muestra el mensaje de éxito
-
-        // Limpiar el formulario después de agregar el usuario
-        document.getElementById('user-form').reset();
-        // Recargar la página
-        location.reload();
-    } catch (error) {
-        console.error('Error al agregar usuario:', error.message);
-        alert('Hubo un error al agregar el usuario.');
-    }
-};
-
-document.getElementById('user-form').addEventListener('submit', handleAddUser);
-
-// Agrega el botón para cancelar la agregación
-document.getElementById('cancel-button');
-cancelButton.addEventListener('click', () => {
-    document.getElementById('user-form').reset();
-    // Puedes agregar más acciones aquí si es necesario
-});
-
-
-
-    // Función para manejar la eliminación de un usuario
     const handleDeleteUser = async (userId) => {
         try {
             const response = await fetch(`http://localhost:3000/api/crud/usuarios/${userId}`, {
                 method: 'DELETE'
             });
             if (!response.ok) {
-                throw new Error('Error al eliminar usuario');
+                const errorData = await response.json();
+                throw new Error(errorData.mensaje || 'Error desconocido');
             }
             const data = await response.json();
             alert(data.mensaje);
-            loadUsers(); // Recargar usuarios después de eliminar
+            loadUsers();
         } catch (error) {
             console.error('Error al eliminar usuario:', error.message);
             alert('Hubo un error al eliminar el usuario.');
         }
     };
 
-    // Listener para manejar la adición de usuarios
-    userForm.addEventListener('submit', handleAddUser);
-
-    // Función para manejar la cancelación de la edición/creación de usuarios
-    const handleCancelEdit = () => {
-        // Limpiar el formulario
-        userForm.reset();
-
-        // Restaurar el texto y funcionalidad del botón de submit
-        submitButton.textContent = 'Agregar Usuario';
-        userForm.removeEventListener('submit', handleUpdateUser);
-        userForm.addEventListener('submit', handleAddUser);
-
-        // Desbloquear el campo de contraseña
-        document.getElementById('password').disabled = false;
-
-        // Limpiar el campo oculto de ID de usuario
-        userIdField.value = '';
-    };
-
-    // Listener para el botón de cancelar
-    cancelButton.addEventListener('click', handleCancelEdit);
-
-    // Cargar usuarios al cargar la página
     loadUsers();
 });

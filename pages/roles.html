@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Roles</title>
+    <link rel="stylesheet" href="../css/rol.css">
+    <link rel="stylesheet" href="../css/header.css">
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <div class="header-container">
+            <h1>Administración de Usuarios</h1>
+            <nav>
+                <ul>
+                    <li><a href="../pages/inicio.html">Inicio</a></li>
+                    <li><a href="../pages/hombre.html">Hombre</a></li>
+                    <li><a href="../pages/mujer.html">Mujer</a></li>
+                    <li><a href="../pages/niños.html">Niños</a></li>
+                    <li><a href="../pages/WebService.html">Pokemon</a></li>
+                    <li><a href="../pages/contacto.html">Contacto</a></li>
+                    <li><a href="../pages/CRUD.html">CRUD Usuarios</a></li>
+                    <li><a href="../pages/productos.html">CRUD Productos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header><br><br>
+
+    <form id="role-form"><br><br>
+        <input type="hidden" id="role-id">
+        <label for="role-name">Nombre del Rol:</label>
+        <input type="text" id="role-name" required>
+
+        <label for="permissions">Permisos (JSON):</label>
+        <textarea id="permissions" rows="4" required></textarea>
+
+        <button type="submit" id="submit-button">Agregar Rol</button>
+        <button type="button" id="cancel-button">Cancelar</button>
+    </form>
+
+    <table id="roles-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre del Rol</th>
+                <th>Permisos</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="roles-table-body">
+            <!-- Las filas se llenarán dinámicamente aquí -->
+        </tbody>
+    </table>
+
+    <script src="../js/rol.js"></script>
+</body>
+</html>
