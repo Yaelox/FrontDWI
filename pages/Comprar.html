@@ -10,9 +10,14 @@
     <section class="seccion-pago">
         <div class="container">
             <h1>Página de Pago</h1>
-            <form action="procesar-pago.php" method="POST">
+            <form id="payment-form">
                 <div class="informacion-cliente">
                     <h2>Información de Contacto</h2>
+                    <label for="cliente">Cliente:</label>
+                    <select id="cliente" required>
+                        <option value="">Selecciona un cliente</option>
+                    </select>
+                    
                     <label for="email">Correo Electrónico:</label>
                     <input type="email" id="email" name="email" required>
                     
@@ -31,7 +36,7 @@
                     <label for="ciudad">Ciudad:</label>
                     <input type="text" id="ciudad" name="ciudad" required>
                     
-                    <label for="estado">Estado/Provincia:</label>
+                    <label for="estado">Estado:</label>
                     <input type="text" id="estado" name="estado" required>
                     
                     <label for="codigo-postal">Código Postal:</label>
@@ -44,33 +49,24 @@
                 <div class="informacion-producto">
                     <h2>Información del Producto</h2>
                     <label for="modelo">Modelo de Tenis:</label>
-                    <select id="modelo" name="modelo" onchange="actualizarPrecio()" required>
+                    <select id="modelo" name="modelo" onchange="manejarCambioProducto()" required>
                         <option value="">Seleccione un modelo</option>
-                        <option value="Modelo A" data-precio="1500">Modelo A - $1,500</option>
-                        <option value="Modelo B" data-precio="1800">Modelo B - $1,800</option>
-                        <option value="Modelo C" data-precio="2000">Modelo C - $2,000</option>
+                        <!-- Las opciones serán cargadas dinámicamente -->
                     </select>
 
                     <label for="talla">Talla (Mexicana):</label>
                     <select id="talla" name="talla" required>
                         <option value="">Seleccione una talla</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
+                        <!-- Las opciones serán cargadas dinámicamente -->
                     </select>
-
+                    
                     <label for="cantidad">Cantidad:</label>
-                    <input type="number" id="cantidad" name="cantidad" min="1" max="10" oninput="actualizarPrecioTotal()" required>
+                    <input type="number" id="cantidad" name="cantidad" min="1" required>
 
-                    <p id="cantidad-disponible">Cantidad disponible: 10</p>
-
-                    <p class="precio">Precio unitario: <span id="precio">Seleccione un modelo</span></p>
-                    <p class="precio">Precio total: <span id="precio-total">Seleccione un modelo y cantidad</span></p>
+                    <p id="precio">Seleccione un modelo</p>
+                    <p id="cantidad-disponible">Cantidad disponible:</p>
+                    <p id="precio-total">Seleccione un modelo y cantidad</p>
                 </div>
-
                 <div class="informacion-pago">
                     <h2>Información de Pago</h2>
                     <label for="nombre-tarjeta">Nombre en la Tarjeta:</label>
@@ -90,29 +86,6 @@
             </form>
         </div>
     </section>
-
-    <script>
-        function actualizarPrecio() {
-            const modeloSelect = document.getElementById('modelo');
-            const precioLabel = document.getElementById('precio');
-            const precioTotalLabel = document.getElementById('precio-total');
-            const precio = modeloSelect.options[modeloSelect.selectedIndex].getAttribute('data-precio');
-            precioLabel.textContent = precio ? '$' + precio : 'Seleccione un modelo';
-            actualizarPrecioTotal(); // Actualizar el precio total al cambiar el modelo
-        }
-
-        function actualizarPrecioTotal() {
-            const precio = document.getElementById('modelo').options[document.getElementById('modelo').selectedIndex].getAttribute('data-precio');
-            const cantidad = document.getElementById('cantidad').value;
-            const precioTotalLabel = document.getElementById('precio-total');
-
-            if (precio && cantidad) {
-                const total = precio * cantidad;
-                precioTotalLabel.textContent = '$' + total;
-            } else {
-                precioTotalLabel.textContent = 'Seleccione un modelo y cantidad';
-            }
-        }
-    </script>
+    <script src="../js/comprar.js"></script>
 </body>
 </html>
