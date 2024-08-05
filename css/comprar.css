@@ -111,3 +111,17 @@ input:focus, select:focus {
     transform: translateY(-3px);
     box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4);
 }
+.btn-regresar {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn-regresar:hover {
+    background-color: #0056b3;
+}

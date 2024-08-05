@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoriaField = document.getElementById('categoria');
     const stockField = document.getElementById('stock');
     const productTableBody = document.querySelector('#product-list tbody');
+    const cancelButton = document.getElementById('cancelar');
 
     const apiUrl = 'http://localhost:3000/api/pd';
 
@@ -55,6 +56,12 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(error);
             alert('Error al guardar el producto');
         }
+    });
+
+    // Manejar clic en el botón de "Cancelar"
+    cancelButton.addEventListener('click', () => {
+        form.reset();
+        productIdField.value = '';
     });
 
     // Obtener productos
